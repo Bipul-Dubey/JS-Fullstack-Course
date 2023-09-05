@@ -1,1 +1,43 @@
-to use strict mode  -> 'use strict'
+JavaScript: High-level, Object-oriented, Multi-Paradigm Language
+            Dynamic effects and web application in the browser
+            react, angular, veu.js
+            backend - node.js
+            native mobile application: react native
+            desktop application
+
+datatype:
+    Primitive and Objects
+    Primitive:
+        Number
+        String
+        Boolean
+        Undefined
+        Null
+        Symbol
+        Bigint
+
+Ways of declaring variable
+var, let, const
+var:
+    global variable
+    can change
+let:
+    scope level variable
+    can change
+const:
+    scope level variable
+    cannot change value once declared
+    const variable must initialized during declaration
+
+
+Operators
+    Arithmatical -> +,-,*,/
+    Assigment -> =, +=, -=, *= , /=
+    Comparison -> <,<=,>,>=, == , === , !=
+        == -> check value only
+        === -> check value and datatype also
+    logical -> && (and) , || (or) , ! (not)
+
+Type Conversion and Type Coercion
+    Type Conversion: when manually convert data Type
+    type Coercion: when JavaScript convert data type by itself
