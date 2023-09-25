@@ -1,0 +1,41 @@
+# For full explaination refer theory lecture pdf 
+
+JavaScript
+- High Level
+- Garbage Collected
+- Interpreted or just-in-time compiled
+- Multi paradigm - An approach and mindset of structring code, which will direct your coding style and technique
+    - Procedural programming
+    - Object-oriented programming
+    - Functioncal programming
+- Prototype-based Object oriented
+- First class Funtion -> In language with First class Funtion, funtions are simply treated as variable. We can pass them into other funtions, and return them from funtions.
+- Dynamic - No need to define data types for variable
+- Single-threaded
+- Non-blocking event loop
+
+JS ENGINE - Program that EXECUTES JS CODE
+            - Popular engine -> chrome, node.js
+Compilation - Entire code is converted into machine code at once, and written to a binary file that can be executed by a computer/compiler.
+Interpretation - Interpreter runs through the source code and it line by line.
+Just-in-time (JIT) Compilation: Entire code is converted into machine code at once, then executed immediately.
+
+Execution Context
+- inside Execution Context
+    - variable environment
+        - let, const, var declarations
+        - Funtions
+        - argument Object
+    - Scope chain
+    - this keyword
+
+HOISTING: Makes some types of variable accessible/usable in the code before they are actually declared.
+          Variable lifted to the top of their scope
+    - behind the scene (real reason) (slide 106)
+        - Before Execution, code is scanned for variable declarations, and for each variable, a new property
+        is created in the variable environment object
+
+this keyword: Special variable that is created for every execution contex(every funtion).
+            Takes the value of(points to) the "owner" of the function in which the this keyword is used
+
+            this is NOT a static. It depend on how the function is called, and its value os only assigned when the function is actually called
