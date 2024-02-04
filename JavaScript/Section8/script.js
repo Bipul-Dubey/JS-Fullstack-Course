@@ -36,19 +36,19 @@ const addExpression = function (a, b) {
 const addArrow = (a, b) => a + b;
 
 // this keyword
-console.log("Calling this globally",this);
+console.log("Calling this globally", this);
 
 // this inside function
 const thisKeyword = function () {
-  console.log("this inside function get",this);
-}
-thisKeyword()
+  console.log("this inside function get", this);
+};
+thisKeyword();
 
 // this inside arrow function
 const byThis = () => {
-  console.log("this inside arrow",this);
-}
-byThis()
+  console.log("this inside arrow", this);
+};
+byThis();
 
 const obj1 = {
   name: "Bipul",
@@ -63,7 +63,7 @@ const obj2 = {
   lastName: "Pandey",
   birthYear: 1997,
   calAge: function () {
-    console.log("this inside regular function inside object",this);
+    console.log("this inside regular function inside object", this);
     // const isDriverReady = function () { // DONOT USE LIKE THIS CREATE BUGS/ERROR
     //   // here this keyword os undefined/from global value
     //   console.log(this);
@@ -73,123 +73,123 @@ const obj2 = {
     // isDriverReady()
 
     // solution 1
-    const self = this
+    const self = this;
     const isDriverReady = function () {
       console.log(self);
-      console.log("obj accessing",self.name);
-    }
-    isDriverReady()
+      console.log("obj accessing", self.name);
+    };
+    isDriverReady();
 
     // solution 2 - arrow function take this properties from global scope/parent scope
-    const isDriverReady2 = () => { 
+    const isDriverReady2 = () => {
       console.log(this);
-      console.log("obj accessing arrow function",this.name);
-    }
-    isDriverReady2()
+      console.log("obj accessing arrow function", this.name);
+    };
+    isDriverReady2();
   },
   geet: () => console.log(`Hey ${this.name}`),
-}
+};
 // borrow function that uses this keyword
-obj2.getName = obj1.getName
+obj2.getName = obj1.getName;
 
 console.log(obj1.getName());
 console.log(obj2.getName());
 
-// this will return undefined/nothing because 
-// arrow function doesnot have this keyword 
+// this will return undefined/nothing because
+// arrow function doesnot have this keyword
 // it take value from global scope/ parent scope
-obj2.geet() 
-obj2.calAge()
+obj2.geet();
+obj2.calAge();
 
 // argument keyword
-const addFun = function (a,b,c) {
-  console.log("ARG",arguments);
-}
+const addFun = function (a, b, c) {
+  console.log("ARG", arguments);
+};
 
-addFun(1,2,4)
+addFun(1, 2, 4);
 
-// preserve value of variable - make it non-changeable 
+// preserve value of variable - make it non-changeable
 // primitive data type
-let lastName = "robin"
-let oldLastname = lastName
-lastName = "John"
-console.log("lastName->",lastName,"oldLastname->",oldLastname);
+let lastName = "robin";
+let oldLastname = lastName;
+lastName = "John";
+console.log("lastName->", lastName, "oldLastname->", oldLastname);
 
 // objects
 john1 = {
   name: "john",
   age: 27,
-  member: ["deo","don"]
-}
+  member: ["deo", "don"],
+};
 
-copyJohn1 = john1
-copyJohn1.age = 30 // it changes the value of original and copy one both because it is pointing to same memory in heap
-console.log("original->",john1);
-console.log("copy->",copyJohn1);
+copyJohn1 = john1;
+copyJohn1.age = 30; // it changes the value of original and copy one both because it is pointing to same memory in heap
+console.log("original->", john1);
+console.log("copy->", copyJohn1);
 
 // shallow copy
 john2 = {
   name: "john",
   age: 27,
-  member: ["deo","don"]
-}
+  member: ["deo", "don"],
+};
 
-const copyJohn2 = Object.assign({},john2)
-copyJohn2.age = 30 // it only change value of copy object because pointing to different location
-copyJohn2.member.push("johnny") // issue still exist for object/array inside object/array
+const copyJohn2 = Object.assign({}, john2);
+copyJohn2.age = 30; // it only change value of copy object because pointing to different location
+copyJohn2.member.push("johnny"); // issue still exist for object/array inside object/array
 // shallow copy only work one level inside object
-console.log("original 2->",john2);
-console.log("copy 2->",copyJohn2);
+console.log("original 2->", john2);
+console.log("copy 2->", copyJohn2);
 
 // method 2 for shallow copy
 john3 = {
   name: "john",
   age: 27,
-  member: ["deo","don"]
-}
+  member: ["deo", "don"],
+};
 
-const copyJohn3 = {...john3}
-copyJohn3.age = 30 // it only change value of copy object because pointing to different location
-copyJohn3.member.push("johnny") // issue still exist for object/array inside object/array
+const copyJohn3 = { ...john3 };
+copyJohn3.age = 30; // it only change value of copy object because pointing to different location
+copyJohn3.member.push("johnny"); // issue still exist for object/array inside object/array
 // shallow copy only work one level inside object
-console.log("original 3->",john3);
-console.log("copy by spread operator 3->",copyJohn3);
+console.log("original 3->", john3);
+console.log("copy by spread operator 3->", copyJohn3);
 
 // deepcopy
 // method 1 for deep copy object
 john4 = {
   name: "john",
   age: 27,
-  member: ["deo","don"],
-  getMember: function (){
+  member: ["deo", "don"],
+  getMember: function () {
     console.log(this.member.join(","));
-  }
-}
+  },
+};
 
 // this deep copy does not work when object contains function/date
 // date shown but not is exact date function
 //  for these issue we can use lodash library
 const copyJohn4 = JSON.parse(JSON.stringify(john4));
-copyJohn4.age = 30 // it only change value of copy object because pointing to different location
-copyJohn4.member.push("johnny") // issue still exist for object/array inside object/array
+copyJohn4.age = 30; // it only change value of copy object because pointing to different location
+copyJohn4.member.push("johnny"); // issue still exist for object/array inside object/array
 // shallow copy only work one level inside object
-console.log("original 4->",john4);
-console.log("deep copy 4->",copyJohn4); // function removed in deep copy
+console.log("original 4->", john4);
+console.log("deep copy 4->", copyJohn4); // function removed in deep copy
 
 // method 2
 john5 = {
   name: "john",
   age: 27,
-  member: ["deo","don"],
-  // getMember: function (){ 
+  member: ["deo", "don"],
+  // getMember: function (){
   //   console.log("function is here");
   // }
-}
+};
 // does not work if contains function
-const johnDeepCopy = structuredClone(john5)
-johnDeepCopy.member.push("Happy")
-console.log("john5->",john5);
-console.log("john deep copy",johnDeepCopy);
+const johnDeepCopy = structuredClone(john5);
+johnDeepCopy.member.push("Happy");
+console.log("john5->", john5);
+console.log("john deep copy", johnDeepCopy);
 
 // other method may use other library - loadish
 //  import library (by cdn/npm      ) then code below
@@ -197,15 +197,15 @@ console.log("######################");
 john6 = {
   name: "john",
   age: 27,
-  member: ["deo","don"],
-  getMember: function (){ 
-    return ("function is here");
-  }
-}
-console.log("john 6->",john6);
-const deepCopyObj = _.cloneDeep(john6)
-deepCopyObj.member.push("roby")
-console.log("deepCopyObj->",deepCopyObj);
-console.log("deep copy object->",deepCopyObj.getMember());
+  member: ["deo", "don"],
+  getMember: function () {
+    return "function is here";
+  },
+};
+console.log("john 6->", john6);
+const deepCopyObj = _.cloneDeep(john6);
+deepCopyObj.member.push("roby");
+console.log("deepCopyObj->", deepCopyObj);
+console.log("deep copy object->", deepCopyObj.getMember());
 
 // shallow copy vs deep copy
