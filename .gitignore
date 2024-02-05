@@ -34,3 +34,6 @@
 # typescript
 **/*.tsbuildinfo
 **/next-env.d.ts
+
+# tempCodeRunnerFile.js
+**/tempCodeRunnerFile.js
