@@ -22,6 +22,10 @@ body:has(.card[data-color="green"]:hover) {
 }
 
 @layer utilities {
+  .font-poppins {
+    font-family: "Poppins", sans-serif;
+  }
+
   .max-container {
     @apply max-w-5xl mx-auto sm:p-16 pb-12 !pt-[126px] px-8 min-h-[calc(100vh-80px)];
   }
@@ -75,7 +79,7 @@ body:has(.card[data-color="green"]:hover) {
   }
 
   .cta-text {
-    @apply text-black-500 font-extrabold flex-1 text-3xl max-md:text-center;
+    @apply text-slate-700 font-extrabold flex-1 text-3xl max-md:text-center;
   }
 }
 
