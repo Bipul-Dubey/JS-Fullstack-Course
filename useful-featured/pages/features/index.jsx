@@ -5,21 +5,7 @@ import { Card, List, ListItem, ListItemText } from "@mui/material";
 import { featuresWithPath } from "@/contants";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useRouter } from "next/router";
-
-const StyledContainer = styled("div")(({}) => ({
-  width: "100%",
-  height: "93.4vh",
-  backgroundColor: "#e3fbb2",
-  display: "flex",
-  flexDirection: "column",
-}));
-
-const StyledCard = styled(Card)(({}) => ({
-  width: "75%",
-  height: "80vh",
-  alignSelf: "center",
-  padding: "7px",
-}));
+import { StyledCard, StyledContainer } from "../components/containers";
 
 const FeaturesPage = () => {
   const router = useRouter();
