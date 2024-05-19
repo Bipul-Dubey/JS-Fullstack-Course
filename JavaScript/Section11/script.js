@@ -63,6 +63,7 @@ const inputClosePin = document.querySelector(".form__input--pin");
 
 /////////////////////////////////////////////////
 // ====================== UI ======================
+const eurToUsd = 1.1;
 
 const displayMovements = (movements) => {
   containerMovements.innerHTML = "";
@@ -74,14 +75,40 @@ const displayMovements = (movements) => {
       i + 1
     } ${type}</div>
       <div class="movements__date">3 days ago</div>
-      <div class="movements__value">${movement}€</div>
+      <div class="movements__value">${movement} €</div>
     </div>
     `;
 
     containerMovements.insertAdjacentHTML("afterbegin", htmlEle);
   });
 };
-displayMovements(account1.movements);
+
+// calculate current balance
+const calculateCurrentBalance = (account = {}) => {
+  account.balance = account?.movements.reduce((acc, curr) => acc + curr, 0);
+  labelBalance.textContent = `${account.balance} €`;
+};
+
+const calcDisplaySummary = (account = {}) => {
+  const income = account?.movements
+    .filter((item) => item > 0)
+    .reduce((acc, curr) => acc + curr, 0);
+
+  labelSumIn.textContent = `${parseFloat(income).toFixed(2)} €`;
+
+  const outcome = account?.movements
+    .filter((item) => item < 0)
+    .reduce((acc, curr) => acc + curr, 0);
+
+  labelSumOut.textContent = `${parseFloat(Math.abs(outcome)).toFixed(2)} €`;
+
+  const interest = account?.movements
+    .filter((mov) => mov > 0)
+    .map((deposit) => (deposit * account?.interestRate) / 100)
+    .filter((int) => int >= 1)
+    .reduce((acc, curr) => acc + curr, 0);
+  labelSumInterest.textContent = `${parseFloat(interest).toFixed(2)} €`;
+};
 
 // calculate username
 const createUserName = (accounts = []) => {
@@ -94,7 +121,79 @@ const createUserName = (accounts = []) => {
   });
 };
 createUserName(accounts);
-console.log("username", accounts);
+
+// == update UI balances ==
+function updateUI(currentAccount = {}) {
+  displayMovements(currentAccount.movements);
+  calculateCurrentBalance(currentAccount);
+  calcDisplaySummary(currentAccount);
+}
+
+// =================== login ===================
+let currentAccount;
+btnLogin.addEventListener("click", (e) => {
+  // prevent default event - like reload on submit
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    (acc) => inputLoginUsername.value == acc.username
+  );
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // display welcome message and UI
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner}`;
+
+    // show UI
+    containerApp.style.opacity = 1;
+
+    // clear input after submit
+    inputLoginUsername.value = inputLoginPin.value = "";
+
+    // calculation based on login account
+    updateUI(currentAccount);
+  }
+});
+
+// =================== transfer ===================
+btnTransfer.addEventListener("click", (e) => {
+  e.preventDefault();
+  const recieverAcc = accounts.find(
+    (acc) => acc.username == inputTransferTo.value
+  );
+  const sendAmount = Number(inputTransferAmount.value);
+
+  if (
+    sendAmount > 0 &&
+    recieverAcc &&
+    currentAccount.balance >= sendAmount &&
+    currentAccount.username != recieverAcc.username
+  ) {
+    currentAccount.movements.push(-sendAmount);
+    recieverAcc.movements.push(sendAmount);
+    updateUI(currentAccount);
+  }
+  inputTransferTo.value = inputTransferAmount.value = "";
+});
+
+// ========== close account =============
+btnClose.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (
+    currentAccount.username == inputCloseUsername.value &&
+    currentAccount.pin == inputClosePin.value
+  ) {
+    accounts.splice(
+      accounts.findIndex((val) => val.username == currentAccount.username),
+      1
+    );
+  }
+  inputCloseUsername.value = inputClosePin.value = "";
+  // hide UI
+  containerApp.style.opacity = 0;
+  labelWelcome.textContent = `Log in to get started`;
+});
+
 /////////////////////////////////////////////////
 // LECTURES
 
@@ -132,9 +231,91 @@ currenciesUnique.forEach((value, key, map) => {
 });
 
 console.log("================ map method =================");
-const eurToUsd = 1.1;
 const movementUsd = movements.map((mov) => mov * eurToUsd);
 
 console.log("movementUsd", movementUsd);
 
 console.log("================ reduce method =================");
+// reduce method takes a callback function and initial value
+// return a single value based on funtion pass in reduce method
+// param in callback function
+// - accumulator - return last calculated value
+// - current value - return current item data
+// - index
+// - array
+//
+
+const balance = movements.reduce((acc, curr, idx, arr) => {
+  console.log(`Iteration ${idx} : ${acc} : ${curr}`);
+  return acc + curr;
+}, 0);
+
+console.log(balance);
+
+// calculate max using reduce
+const max = movements.reduce((acc, curr) => {
+  if (acc > curr) {
+    return acc;
+  } else {
+    return curr;
+  }
+}, movements[0]);
+
+console.log("max", max);
+
+//  ============== challenge 2 =============
+const calculateAverageHumanAge = (data = []) => {
+  const humageAgeFromDog = data?.map((age) => {
+    if (age <= 2) {
+      return 2 * age;
+    } else {
+      return 16 + age * 4;
+    }
+  });
+
+  // eligible = 17+
+  const eligible = humageAgeFromDog?.filter((item) => item >= 18);
+
+  // calculate average age
+  // const avgAge = eligible.reduce((acc, curr) => acc + curr) / eligible.length;
+  const avgAge = eligible.reduce(
+    (acc, curr, i, arr) => acc + curr / arr.length,
+    0
+  );
+  console.log("avgAge", avgAge);
+};
+calculateAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+
+console.log("======== Some and Every method ========");
+
+console.log("======================= sorting ==================");
+const owner = ["Jonas", "Zach", "Adam", "Martha"];
+// sort() method
+//- first convert everything into string then sort
+// - mutate the array
+console.log(owner.sort());
+
+console.log(movements);
+// console.log(movements.sort());
+movements.sort((a, b) => {
+  if (a > b) {
+    return 1;
+  }
+  if (b > a) {
+    return -1;
+  }
+});
+// movements.sort((a, b) => a - b)
+console.log(movements);
+
+// descending order
+movements.sort((a, b) => {
+  if (a > b) {
+    return -1;
+  }
+  if (b > a) {
+    return 1;
+  }
+});
+
+console.log(movements);
