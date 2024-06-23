@@ -1,0 +1,55 @@
+### React - library not a framework
+- It is an open-source JavaScript library used for building user interfaces,
+  particularly single-page applications where you need a fast, interactive user experience.
+  It was developed by Facebook and is maintained by Facebook and a community of individual developers and companies.
+
+## Here are some key features and concepts of React:
+1. Component-Based Architecture: React applications are built using components, which are reusable, self-contained pieces of UI.
+  Each component can have its own state and lifecycle.
+2.JSX (JavaScript XML): React uses JSX, a syntax extension that allows you to write HTML-like code within JavaScript.
+  This makes it easier to create and visualize the structure of your UI components.
+3. Virtual DOM: React uses a virtual DOM to improve performance. When the state of an object changes,
+  React updates the virtual DOM first, then it compares the virtual DOM with the real DOM and 
+  updates only the parts of the DOM that have changed.
+4. State and Props: State is a built-in object that stores property values that belong to a component.
+   Props (short for properties) are read-only attributes used to pass data from one component to another.
+5. Lifecycle Methods: React components have lifecycle methods that you can override to run code at specific
+   times in the process of a component being created and destroyed.
+
+6. React uses declarative programming: It is a programming paradigm that expresses the logic of a computation
+  without describing its control flow
+  - Declarative programming in React means you describe what the UI should look like for a given state,
+    rather than specifying the exact steps to achieve that UI. React takes care of updating the DOM to match the desired state.
+
+## React Folder structure
+my-react-app/
+├── node_modules/
+├── public/ => This directory contains static files that will be served directly by the web server.
+│   ├── index.html => The main HTML file that serves as the entry point for the React application. The root <div> element in this file is where the React app will be mounted.
+│   ├── favicon.ico
+│   └── manifest.json => This file provides metadata used when your web app is installed on a user's mobile device or desktop.
+├── src/ => This directory contains the source code for your React application.
+│   ├── assets/ => A folder to store static assets like images and styles.
+│   │   ├── images/
+│   │   └── styles/
+│   │       └── App.css
+│   ├── components/ => A folder to store reusable React components.
+│   │   └── App.js
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.js => The JavaScript entry point of your application. This is where the React app is rendered to the DOM.
+│   ├── index.css
+│   └── serviceWorker.js
+├── .gitignore
+├── package.json => This file contains metadata about your project, including dependencies, scripts, and other configuration settings.
+├── README.md
+└── yarn.lock / package-lock.json => These files are generated automatically and ensure that the exact versions of dependencies are installed. yarn.lock is used if you are using Yarn as your package manager, while package-lock.json is used if you are using npm.
+
+## jsx/js => JavaScript XML
+- JSX (JavaScript XML) is a syntax extension for JavaScript that is commonly used with React to describe what the UI should look like.
+  It allows developers to write HTML-like code within JavaScript, making it easier to create and visualize the structure of the UI.
+  JSX is then transformed into regular JavaScript by tools like Babel before being executed in the browser.
+
+  -- We must have to import "import React from 'react';" to use JSX in HTML
+
+## babel and webpack
