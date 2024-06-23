@@ -23,5 +23,5 @@ JavaScript -> Udemy | The modern JavaScript course for everyone! Master JavaScri
 
 # Gym website - help in workout
 - Exploring Rapid APIs - https://rapidapi.com/hub
-- ![react_gym_website.webm](https://github.com/Bipul-Dubey/JS-Fullstack-Course/assets/91466134/cad966a9-c38d-4c7c-afef-177ea4b5fe70)
+![react_gym_website.webm](https://github.com/Bipul-Dubey/JS-Fullstack-Course/assets/91466134/cad966a9-c38d-4c7c-afef-177ea4b5fe70)
 
