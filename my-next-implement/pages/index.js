@@ -1,5 +1,6 @@
 import DragableTaskList from "@/components/dragableTaskList";
 import { MapLocator } from "@/components/MapLocator";
+import { TextEditor } from "@/components/TextEditor";
 import Head from "next/head";
 
 export default function Home() {
@@ -12,7 +13,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <MapLocator locations={[]} /> */}
-      <DragableTaskList />
+      {/* <DragableTaskList /> */}
+      <div style={{ height: "600px", width: "600px" }}>
+        <TextEditor />
+      </div>
     </>
   );
 }
