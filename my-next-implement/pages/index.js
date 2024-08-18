@@ -1,7 +1,17 @@
 import DragableTaskList from "@/components/dragableTaskList";
 import { MapLocator } from "@/components/MapLocator";
+// import QuillTextEditor from "../components/QuillTextEditor";
 import { TextEditor } from "@/components/TextEditor";
+import { TextReader } from "@/components/TextReader";
 import Head from "next/head";
+import dynamic from "next/dynamic";
+
+const QuillTextEditor = dynamic(() => import("../components/QuillTextEditor"), {
+  ssr: false,
+  loading: () => {
+    return <div>Loading............</div>;
+  },
+});
 
 export default function Home() {
   return (
@@ -14,9 +24,9 @@ export default function Home() {
       </Head>
       {/* <MapLocator locations={[]} /> */}
       {/* <DragableTaskList /> */}
-      <div style={{ height: "600px", width: "600px" }}>
-        <TextEditor />
-      </div>
+      {/* <TextEditor /> */}
+      {/* <TextReader /> */}
+      <QuillTextEditor />
     </>
   );
 }
