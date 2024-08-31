@@ -1,0 +1,231 @@
+
+    Date: 2024-08-25T16:57:13.496Z
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours/9
+
+  
+
+    Date: 2024-08-25T16:59:24.178Z
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours
+    body: {}
+  
+
+    Date: 2024-08-25T16:59:34.245Z
+    Host/IP: ::1
+    Method: PATCH
+    Pathname: /api/v1/tours/9
+    body: {"name":"Testing the tour"}
+  
+
+    Date: 2024-08-25T17:15:06.713Z
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours
+    body: {}
+  
+
+    Date: 25/8/2024
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours
+    body: {}
+  
+
+    Date: 25/8/2024, 10:46:09 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours
+    body: {}
+  
+
+    Date: 31/8/2024, 12:49:47 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours
+    body: {}
+  
+
+    Date: 31/8/2024, 12:50:14 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours
+    body: {}
+  
+
+    Date: 31/8/2024, 12:50:19 pm
+    Host/IP: ::1
+    Method: POST
+    Pathname: /api/v1/tours
+    body: {"duration":10,"name":"Test tour","difficulty":"easy"}
+  
+
+    Date: 31/8/2024, 12:50:25 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours/9
+    body: {}
+  
+
+    Date: 31/8/2024, 12:50:32 pm
+    Host/IP: ::1
+    Method: PATCH
+    Pathname: /api/v1/tours/9
+    body: {"name":"Testing the tour"}
+  
+
+    Date: 31/8/2024, 12:50:38 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours/9
+    body: {}
+  
+
+    Date: 31/8/2024, 12:50:43 pm
+    Host/IP: ::1
+    Method: DELETE
+    Pathname: /api/v1/tours/9
+    body: {}
+  
+
+    Date: 31/8/2024, 1:02:00 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours
+    body: {}
+  
+
+    Date: 31/8/2024, 1:02:35 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/users
+    body: {}
+  
+
+    Date: 31/8/2024, 1:02:40 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/users
+    body: {}
+  
+
+    Date: 31/8/2024, 1:03:26 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/users
+    body: {}
+  
+
+    Date: 31/8/2024, 3:28:34 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours/22
+    body: {}
+  
+
+    Date: 31/8/2024, 3:29:26 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours/22
+    body: {}
+  
+
+    Date: 31/8/2024, 3:29:37 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours/22
+    body: {}
+  
+
+    Date: 31/8/2024, 3:29:54 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours/2
+    body: {}
+  
+
+    Date: 31/8/2024, 3:34:57 pm
+    Host/IP: ::1
+    Method: POST
+    Pathname: /api/v1/tours
+    body: {"duration":10,"name":"Test tour","difficulty":"easy"}
+  
+
+    Date: 31/8/2024, 3:35:18 pm
+    Host/IP: ::1
+    Method: POST
+    Pathname: /api/v1/tours
+    body: {"duration":10,"name":"Test tour","difficulty":"easy"}
+  
+
+    Date: 31/8/2024, 3:37:37 pm
+    Host/IP: ::1
+    Method: POST
+    Pathname: /api/v1/tours
+    body: {"duration":10,"name":"Test tour","difficulty":"easy"}
+  
+
+    Date: 31/8/2024, 3:38:02 pm
+    Host/IP: ::1
+    Method: POST
+    Pathname: /api/v1/tours
+    body: {"duration":10,"name":"Test tour","difficulty":"easy"}
+  
+
+    Date: 31/8/2024, 3:48:38 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /img/user.jpg
+    body: {}
+  
+
+    Date: 31/8/2024, 3:48:38 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /img/tour-1-cover.jpg
+    body: {}
+  
+
+    Date: 31/8/2024, 3:48:38 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /img/tour-2-cover.jpg
+    body: {}
+  
+
+    Date: 31/8/2024, 3:48:38 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /img/tour-5-cover.jpg
+    body: {}
+  
+
+    Date: 31/8/2024, 3:48:38 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /img/tour-6-cover.jpg
+    body: {}
+  
+
+    Date: 31/8/2024, 3:48:38 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /img/tour-3-cover.jpg
+    body: {}
+  
+
+    Date: 31/8/2024, 3:48:38 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /img/tour-4-cover.jpg
+    body: {}
+  
+
+    Date: 31/8/2024, 6:03:52 pm
+    Host/IP: ::1
+    Method: GET
+    Pathname: /api/v1/tours
+    body: {}
+  
