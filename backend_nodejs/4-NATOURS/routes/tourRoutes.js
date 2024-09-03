@@ -7,9 +7,17 @@ const {
   getTour,
   updateTour,
   deleteTour,
+  getTopNTour,
+  getTourStats,
+  getMonthlyPlan,
 } = require("../controllers/tourControllers");
 
 // tourRouter.param("id", checkTourIdExists);
+
+// to tour
+tourRouter.route("/top-cheap-tours").get(getTopNTour, getAllTour);
+tourRouter.route("/tour-stats").get(getTourStats);
+tourRouter.route("/monthly-plan/:year").get(getMonthlyPlan);
 
 tourRouter.route("/").get(getAllTour).post(createNewTour);
 // .post(validateCreateTourPayload, createNewTour);
