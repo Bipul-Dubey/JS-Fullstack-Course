@@ -27,6 +27,38 @@ const app = require("./app");
 
 // ======== start server ======
 const port = process.env.PORT;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("App running on port: ", port);
 });
+
+// execute for un handled promises
+process.on("unhandledRejection", (err) => {
+  console.log(
+    "unhandledRejection! 💥💥💥 Shutting down...",
+    err.name,
+    " : ",
+    err.message
+  );
+
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
+process.on("uncaughtException", (err) => {
+  console.log(
+    "uncaughtException! 💥💥💥 Shutting down...",
+    err.name,
+    " : ",
+    err.message
+  );
+});
+
+// Notes:
+// nbd : node debugger -  by google - npm i nbd
+/* 
+Errors:
+Operational Errors:
+- Invalid path accessed, Invalid user input (validator error from mongoose), Failed to connect to server/database, Request timeout
+Programming errors
+*/

@@ -80,29 +80,29 @@ tourSchema.virtual("durationWeeks").get(function () {
 });
 
 // Document middleware: runs before the .save() and .create(), not on insertMany
-tourSchema.pre("save", function (next) {
+/* tourSchema.pre("save", function (next) {
   console.log("this in save", this);
   next();
-});
+}); */
 
-tourSchema.post("save", function (doc, next) {
+/* tourSchema.post("save", function (doc, next) {
   console.log("this in post save", doc);
   next();
 });
+ */
 
 // Query middleware: its run when any find query is executed
 // tourSchema.pre("find", function (next) {
-tourSchema.pre(/^find/, function (next) {
+/* tourSchema.pre(/^find/, function (next) {
   console.log("find query executed");
   next();
-});
+}); */
 
 // Agregation middleware: its run before and after any aggregation happen
-tourSchema.pre("aggregate", function (next) {
+/* tourSchema.pre("aggregate", function (next) {
   console.log("aggregation is happend");
-
   next();
-});
+}); */
 
 const Tour = mongoose.model("Tour", tourSchema);
 
