@@ -10,19 +10,19 @@ app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
 // == log api call ==
-app.use((req, res, next) => {
-  const logDetails = `
-    Date: ${new Date().toLocaleString()}
-    Host/IP: ${req.ip}
-    Method: ${req.method}
-    Pathname: ${req.originalUrl}
-    body: ${JSON.stringify(req.body)}
-  `;
+// app.use((req, res, next) => {
+//   const logDetails = `
+//     Date: ${new Date().toLocaleString()}
+//     Host/IP: ${req.ip}
+//     Method: ${req.method}
+//     Pathname: ${req.originalUrl}
+//     body: ${JSON.stringify(req.body)}
+//   `;
 
-  // Log the details to logs.txt
-  fileLogger(logDetails);
-  next();
-});
+//   // Log the details to logs.txt
+//   fileLogger(logDetails);
+//   next();
+// });
 
 //  ====== routing ========
 const userRouter = require("./routes/userRoutes");

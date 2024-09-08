@@ -11,6 +11,7 @@ const {
   getTourStats,
   getMonthlyPlan,
 } = require("../controllers/tourControllers");
+const { protectRoutes } = require("../controllers/authControllers");
 
 // tourRouter.param("id", checkTourIdExists);
 
@@ -19,7 +20,7 @@ tourRouter.route("/top-cheap-tours").get(getTopNTour, getAllTour);
 tourRouter.route("/tour-stats").get(getTourStats);
 tourRouter.route("/monthly-plan/:year").get(getMonthlyPlan);
 
-tourRouter.route("/").get(getAllTour).post(createNewTour);
+tourRouter.route("/").get(protectRoutes, getAllTour).post(createNewTour);
 // .post(validateCreateTourPayload, createNewTour);
 tourRouter.route("/:id").get(getTour).patch(updateTour).delete(deleteTour);
 
