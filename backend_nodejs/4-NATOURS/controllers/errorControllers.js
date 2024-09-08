@@ -60,11 +60,12 @@ exports.globalErrorMiddleware = (err, req, res, next) => {
   if (process.env.NODE_ENV.trim() == "development") {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV.trim() == "production") {
-    let error = { ...err };
+    let error = JSON.parse(JSON.stringify(err));
 
-    if (err.name === "CastError") error = handleCastErrorDB(error);
-    if (err.code === 11000) error = handleDuplicateFieldsDb(error);
-    if (err.name === "ValidationError") error = handleValidationErrorDb(error);
+    if (error.name === "CastError") error = handleCastErrorDB(error);
+    if (error.code === 11000) error = handleDuplicateFieldsDb(error);
+    if (error.name === "ValidationError")
+      error = handleValidationErrorDb(error);
 
     sendErrorProd(error, res);
   }
