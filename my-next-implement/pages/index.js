@@ -5,6 +5,7 @@ import { TextEditor } from "@/components/TextEditor";
 import { TextReader } from "@/components/TextReader";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import { WhatsAppChat } from "@/components/whatsappMobileView";
 
 const QuillTextEditor = dynamic(() => import("../components/QuillTextEditor"), {
   ssr: false,
@@ -26,7 +27,8 @@ export default function Home() {
       {/* <DragableTaskList /> */}
       {/* <TextEditor /> */}
       {/* <TextReader /> */}
-      <QuillTextEditor />
+      {/* <QuillTextEditor /> */}
+      <WhatsAppChat />
     </>
   );
 }
