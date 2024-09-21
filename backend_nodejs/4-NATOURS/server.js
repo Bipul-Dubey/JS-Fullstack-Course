@@ -62,3 +62,11 @@ Operational Errors:
 - Invalid path accessed, Invalid user input (validator error from mongoose), Failed to connect to server/database, Request timeout
 Programming errors
 */
+
+/*
+Data Modelling:
+1. Different types of relations between data (1:1, 1:many, many:many)
+2. referencing/normalization vs embedding/denormalization
+3. Embedding (keep data in same document)  or referencing (keep data in another document and keep ids for reference)
+4. Types of referencing
+*/
