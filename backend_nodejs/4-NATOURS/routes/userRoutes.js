@@ -7,13 +7,35 @@ const {
   getUser,
   updateUser,
   deleteUser,
+  updateCurrentUser,
+  deleteCurrentUser,
 } = require("../controllers/userControllers");
-const { signup, login } = require("../controllers/authControllers");
+const {
+  signup,
+  login,
+  resetPassword,
+  forgotPassword,
+  updatePassword,
+  protectRoutes,
+  restrictTo,
+} = require("../controllers/authControllers");
 
 userRouter.route("/signup").post(signup);
 userRouter.route("/login").post(login);
+userRouter.route("/forgot-password").post(forgotPassword);
+userRouter.route("/reset-password/:token").patch(resetPassword);
 
-userRouter.route("/").get(getAllUser).post(createNewUser);
-userRouter.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
+userRouter.use(protectRoutes);
+
+userRouter.route("/reset-my-password").patch(updatePassword);
+userRouter.route("/update-current-user").patch(updateCurrentUser);
+userRouter.route("/delete-current-user").delete(deleteCurrentUser);
+
+userRouter.route("/").get(getAllUser);
+userRouter
+  .route("/:id")
+  .get(getUser)
+  .patch(updateUser)
+  .delete(restrictTo("admin"), deleteUser);
 
 module.exports = userRouter;

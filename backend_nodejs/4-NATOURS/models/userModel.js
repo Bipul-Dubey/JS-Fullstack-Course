@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 const userSchema = mongoose.Schema(
   {
@@ -16,6 +17,11 @@ const userSchema = mongoose.Schema(
       validate: [validator.isEmail, "Please provide a valid email"],
     },
     photo: String,
+    role: {
+      type: String,
+      enum: ["user", "guide", "lead-guide", "admin"],
+      default: "user",
+    },
     password: {
       type: String,
       required: [true, "Please provide a password"],
@@ -35,6 +41,13 @@ const userSchema = mongoose.Schema(
       select: false,
     },
     passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    isActive: {
+      type: Boolean,
+      default: true,
+      select: false,
+    },
   },
   { timestamps: true }
 );
@@ -48,6 +61,19 @@ userSchema.pre("save", async function (next) {
 
   // remove passwordConfirm so it doesnot persist in database
   this.passwordConfirm = undefined;
+  next();
+});
+
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password") || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 5000; // sometime it happend that token change after when this data has changed that is why we minus some time
+  next();
+});
+
+userSchema.pre(/^find/, function (next) {
+  // this points to the current query
+  this.find({ isActive: true });
   next();
 });
 
@@ -69,6 +95,18 @@ userSchema.methods.changedPasswordAfter = function (JwtTimestamp) {
   }
   // False means NOT changed
   return false;
+};
+
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString("hex");
+
+  this.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
 };
 
 const User = mongoose.model("User", userSchema);

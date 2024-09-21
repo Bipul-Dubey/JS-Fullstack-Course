@@ -65,6 +65,38 @@ const tourSchema = mongoose.Schema(
     },
     images: [String],
     startDates: [Date],
+    startLocation: {
+      // GeoJSON
+      type: {
+        type: String,
+        default: "Point",
+        enum: ["Point"],
+        message: "Type can be 'Point' only",
+      },
+      coordinates: [Number],
+      address: String,
+      description: String,
+    },
+    locations: [
+      {
+        type: {
+          type: String,
+          default: "Point",
+          enum: ["Point"],
+          message: "Type can be 'Point' only",
+        },
+        coordinates: [Number],
+        address: String,
+        description: String,
+        day: Number,
+      },
+    ],
+    guides: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     timestamps: true,
@@ -73,10 +105,30 @@ const tourSchema = mongoose.Schema(
   }
 );
 
+// implementing indexing
+tourSchema.index({
+  price: 1, // column to set as index
+});
+
 // virtual property - this is present only when get method is called and
 // we cannot perform any calculation on this in BE
 tourSchema.virtual("durationWeeks").get(function () {
   return this.duration / 7;
+});
+
+// virtual populate
+tourSchema.virtual("reviews", {
+  ref: "Review",
+  foreignField: "tour",
+  localField: "_id",
+});
+
+tourSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "guides",
+    select: "-__v -createdAt -updatedAt -passwordChangedAt",
+  });
+  next();
 });
 
 // Document middleware: runs before the .save() and .create(), not on insertMany
