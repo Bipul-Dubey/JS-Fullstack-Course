@@ -1,7 +1,55 @@
+const sharp = require("sharp");
 const User = require("../models/userModel");
 const AppError = require("../utils/appError");
 const { catchAsync } = require("./errorControllers");
 const { deleteOne, getAll } = require("./handlerFactory");
+const fs = require("fs");
+
+const multer = require("multer");
+
+// const multerStorage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     const dir = "public/images";
+
+//     if (!fs.existsSync(dir)) {
+//       fs.mkdirSync(dir, { recursive: true });
+//     }
+
+//     cb(null, dir);
+//   },
+//   filename: (req, file, cb) => {
+//     // user-{userId}-timestamp.jpeg
+//     const ext = file.mimetype.split("/")[1];
+//     cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
+//   },
+// });
+
+const multerStorage = multer.memoryStorage();
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new AppError("Not an image! Please upload only images.", 400), false);
+  }
+};
+
+const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
+
+exports.uploadUserPhoto = upload.single("photo");
+
+exports.resizeUserPhoto = (req, file, next) => {
+  if (!req.file) return next();
+
+  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`; // because it is always jpeg
+
+  sharp(req.file.buffer)
+    .resize(500, 500)
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`public/images/${req.file.filename}`);
+  next();
+};
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -15,31 +63,23 @@ const filterObj = (obj, ...allowedFields) => {
 
 exports.getAllUser = getAll(User);
 
-exports.createNewUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "route not defined",
-  });
-};
-
-exports.getUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "route not defined",
-  });
-};
-
-exports.updateUser = (req, res) => {
-  res.status(500).json({
-    status: "error",
-    message: "route not defined",
-  });
-};
-
 exports.deleteUser = deleteOne(User);
+
+exports.getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: user,
+    },
+  });
+});
 
 exports.updateCurrentUser = catchAsync(async (req, res, next) => {
   // current loggged in user can only update itself
+  console.log("res", req.file);
+
   // 1) create error if user POSTs password data
   if (req.body.password || req.body.passwordConfirm) {
     return next(
@@ -52,6 +92,7 @@ exports.updateCurrentUser = catchAsync(async (req, res, next) => {
 
   // 2) filtered out data (key) which is not allowed to update
   const filteredBody = filterObj(req.body, "name", "email");
+  if (req.file) filteredBody.photo = req.file.filename;
 
   // 3) update user document
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
