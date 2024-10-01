@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const { type } = require("os");
 
 const userSchema = mongoose.Schema(
   {
@@ -16,7 +17,10 @@ const userSchema = mongoose.Schema(
       lowercase: true,
       validate: [validator.isEmail, "Please provide a valid email"],
     },
-    photo: String,
+    photo: {
+      type: String,
+      default: "default.jpg",
+    },
     role: {
       type: String,
       enum: ["user", "guide", "lead-guide", "admin"],
