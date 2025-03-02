@@ -22,6 +22,9 @@ JavaScript -> Udemy | The modern JavaScript course for everyone! Master JavaScri
   -- convert into jsx components -> https://gltf.pmnd.rs/
 
 # Gym website - help in workout
+
 - Exploring Rapid APIs - https://rapidapi.com/hub
+
+# prompt share with nextjs fullstack
 
 [Watch the video](https://github.com/Bipul-Dubey/JS-Fullstack-Course/assets/91466134/cad966a9-c38d-4c7c-afef-177ea4b5fe70)
